@@ -1,6 +1,6 @@
 # Reveal.js plugin - mapbox-gl
 
-[Reveal.js](https://github.com/hakimel/reveal.js) plugin to embed interactive maps in slides
+[Reveal.js](https://github.com/hakimel/reveal.js) plugin to embed interactive maps in slides. [DEMO](https://lipov3cz3k.github.io/reveal.js-mapbox-gl-plugin/)
 
 ## Installation
 
@@ -36,6 +36,16 @@ Center has to be a list `[lon, lat]`.
 ```html
 <section data-mapbox='{"duration":4000, "zoom":13, "bearing":0, "center":[16.2957322, 50.1173050]}'>
 	<span class="fragment current-visible" data-mapbox-transform-to='{"duration":4000, "zoom":10, "bearing":0, "center":[36.8227, -1.2847]}'></span>
+</section>
+```
+
+To draw path to the map you can include GeoJSON format, just add attribute `data-mapbox-trek` with path to json file.
+
+```html
+<section data-mapbox='{"duration":4000, "zoom":9, "bearing":0, "center":[37.3046, -0.1587]}'
+		 data-mapbox-trek="data/my-expedition/mt-kenya.json">Mt.Kenya
+	<span class="fragment current-visible" data-mapbox-transform-to='{"duration":4000, "zoom":14, "bearing":0, "center":[37.0238, -0.1703]}'></span>
+	<span class="fragment current-visible" data-mapbox-transform-to='{"duration":4000, "zoom":14, "bearing":0, "center":[37.2058, 0.0538]}'></span>
 </section>
 ```
 

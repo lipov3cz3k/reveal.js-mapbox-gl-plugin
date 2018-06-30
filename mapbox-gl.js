@@ -20,7 +20,7 @@ var RevealMapbox = window.RevealMapbox || (function(){
 		mapboxgl.accessToken = options.accessToken;
 		return new mapboxgl.Map({
 			container: mapContainer,
-			style: 'mapbox://styles/mapbox/streets-v9'
+			style: 'mapbox://styles/mapbox/outdoors-v9'
 		});
 	}
 
@@ -32,14 +32,44 @@ var RevealMapbox = window.RevealMapbox || (function(){
 		}
 	}
 
-	function flyToJson(mapbox, position){
-		position.center = position.center || [0,0]
-		position.bearing = position.bearing || 0
-		position.zoom = position.zoom || 10
-		position.speed = position.speed || 1.2
-		position.curve = position.curve || 1.42
-		position.pitch = position.pitch || 0
-		mapbox.flyTo(position)
+	function flyToPosition(mapbox, position){
+		try{
+			position.center = position.center || [0,0]
+			position.bearing = position.bearing || 0
+			position.zoom = position.zoom || 10
+			position.speed = position.speed || 1.2
+			position.curve = position.curve || 1.42
+			position.pitch = position.pitch || 0
+			mapbox.flyTo(position);
+		}catch(err){
+			console.log(err);
+		}
+	}
+
+	function addTrack(mapbox, trekUrl){
+		trekId = trekUrl
+		if(mapbox.getLayer(trekId))
+			return;
+		try{
+			mapbox.addLayer({
+				"id": trekId,
+				"type": "line",
+				"source": {
+					"type": "geojson",
+					"data": trekUrl
+				},
+				"layout": {
+					"line-join": "round",
+					"line-cap": "round"
+				},
+				"paint": {
+					"line-color": "#888",
+					"line-width": 8
+				}
+			});
+		}catch(err){
+			console.log(err);
+		}
 	}
 
 	function goCurrentMapPosition(){
@@ -53,13 +83,15 @@ var RevealMapbox = window.RevealMapbox || (function(){
 			currentSlide = Reveal.getCurrentSlide();
 			position = JSON.parse(currentSlide.getAttribute("data-mapbox"));
 		}
-		flyToJson(Reveal.getCurrentSlide().mapbox, position);
+		flyToPosition(Reveal.getCurrentSlide().mapbox, position);
 	}
 
 	Reveal.addEventListener( 'slidechanged', function( event ) {
 		if(!event.currentSlide.hasAttribute("data-mapbox"))
 			return;
 		Reveal.getCurrentSlide().mapbox.resize()
+		if(event.currentSlide.hasAttribute("data-mapbox-trek"))
+			addTrack(Reveal.getCurrentSlide().mapbox, Reveal.getCurrentSlide().getAttribute("data-mapbox-trek"));
 		goCurrentMapPosition()
 	} );
 
