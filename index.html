@@ -12,6 +12,8 @@
 		<!-- Theme used for syntax highlighting of code -->
 		<link rel="stylesheet" href="lib/css/zenburn.css">
 
+		<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.46.0/mapbox-gl.css' rel='stylesheet' />
+
 		<!-- Printing and PDF exports -->
 		<script>
 			var link = document.createElement( 'link' );
@@ -24,8 +26,17 @@
 	<body>
 		<div class="reveal">
 			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
+				<section>Mapbox-GL for Reveal.js</section>
+				<section data-mapbox='{"duration": 4000, "zoom": 14, "bearing": 73, "lat": -16.3364367, "lon": -68.0408164, "pitch": 30, "center": [-68.0408164, -16.3364367]}'>Deathroad
+						<span class="fragment current-visible" data-mapbox-transform-to='{"duration": 4000, "zoom": 14, "bearing": 73, "lat": -16.2896, "lon": -67.8253, "pitch": 30, "center": [-67.8253, -16.2896]}'></span>
+						<span class="fragment current-visible" data-mapbox-transform-to='{"duration": 4000, "zoom": 14, "bearing": -11, "lat": -16.2561, "lon": -67.785, "pitch": 30, "center": [-67.785, -16.2561]}'></span>
+						<span class="fragment current-visible" data-mapbox-transform-to='{"duration": 4000, "zoom": 14, "bearing": 73, "lat": -16.2314, "lon": -67.7935, "pitch": 30, "center": [-67.7935, -16.2314]}'></span>
+						<span class="fragment current-visible" data-mapbox-transform-to='{"duration": 4000, "zoom": 14, "bearing": 70, "lat": -16.2190431, "lon": -67.7388244, "speed": 0.5, "curve": 0.4, "pitch": 60, "center": [-67.7388244, -16.2190431]}'></span>
+				</section>
+				<section data-mapbox='{"duration": 4000, "zoom": 14, "bearing": 70, "lat": -16.5199, "lon": -67.9256, "pitch": 60, "center": [-67.9256, -16.5199]}'
+						 data-mapbox-trek="data/1 takesi.json">Takesi trail
+					<span class="fragment current-visible" data-mapbox-transform-to='{"duration": 4000, "zoom": 14, "bearing": 70, "lat": -16.4016572, "lon": -67.7668075, "speed": 0.1, "curve": 0.4, "pitch": 60,"center": [-67.7668075, -16.4016572]}'></span>
+				</section>
 			</div>
 		</div>
 
@@ -38,11 +49,10 @@
 			// - https://github.com/hakimel/reveal.js#dependencies
 			Reveal.initialize({
 				dependencies: [
-					{ src: 'plugin/markdown/marked.js' },
-					{ src: 'plugin/markdown/markdown.js' },
-					{ src: 'plugin/notes/notes.js', async: true },
-					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
-				]
+					{ src: 'https://api.tiles.mapbox.com/mapbox-gl-js/v0.46.0/mapbox-gl.js' },
+					{ src: 'plugin/mapbox-gl/mapbox-gl.js'},
+				],
+				mapbox: {accessToken: "pk.eyJ1IjoibGlwb3YzY3ozayIsImEiOiJjamo3YXlwNTMwdHV1M3FvM3E2dmcxMWZsIn0.9Ax3qI890KLFhFTS6inMEA"}
 			});
 		</script>
 	</body>
