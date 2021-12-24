@@ -3,7 +3,12 @@
  *
  * @author Tomas Lipovsky
  */
-var RevealMapbox = window.RevealMapbox || (function(){
+window.RevealMapbox = window.RevealMapbox || {
+    id: 'RevealMapbox',
+    init: function(deck) { initMapbox(deck) }
+};
+
+const initMapbox = function(Reveal){
 
 	var options = Reveal.getConfig().mapbox || {};
 	options.accessToken = options.accessToken || 'undefined'
@@ -106,4 +111,4 @@ var RevealMapbox = window.RevealMapbox || (function(){
 			return;
 		goCurrentMapPosition();
 	} );
-})();
+};
