@@ -8,21 +8,24 @@
 
 1. Copy the file `mapbox-gl.js` into the plugin folder of your reveal.js presentation, i.e. `plugin/mapbox-gl`.
 
-2. Add the plugins to the dependencies in your presentation
+2. Add script imports
+
+```html
+<script src="https://api.tiles.mapbox.com/mapbox-gl-js/v0.46.0/mapbox-gl.js"></script>
+<script src="plugin/mapbox-gl/mapbox-gl.js"></script>
+```
+
+3. Add the plugin name to the `plugins` in your presentation
 
 ```javascript
 Reveal.initialize({
 	// ...
-	dependencies: [
-		// ...
-		{ src: 'https://api.tiles.mapbox.com/mapbox-gl-js/v0.46.0/mapbox-gl.js' },
-		{ src: 'plugin/mapbox-gl/mapbox-gl.js'},
-		// ...
-	],
+	plugins: [ RevealMapbox ],
+	// ...
 	mapbox: {accessToken: "YOUR ACCESS TOKEN"}
 });
 ```
-3. Add CSS import
+4. Add CSS import
 ```html
 <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.46.0/mapbox-gl.css' rel='stylesheet' />
 ```
